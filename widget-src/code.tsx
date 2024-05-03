@@ -11,6 +11,7 @@ function PropertyMenuWidget() {
 	const [pageType, setPageType] = useSyncedState("pageType", "layout-1");
 
 	const pageTypeOptions = [
+		{ option: "connector", label: "Connector" },
 		{ option: "layout-1", label: "Landing" },
 		{ option: "layout-2", label: "Homepage" },
 		{ option: "layout-3", label: "Parent" },
@@ -27,7 +28,6 @@ function PropertyMenuWidget() {
 		{ option: "layout-14", label: "Tool" },
 		{ option: "layout-15", label: "Legals" },
 		{ option: "layout-16", label: "404" },
-		{ option: "connector", label: "Connection Block" },
 	];
 
 	const layoutColors = {
@@ -35,7 +35,7 @@ function PropertyMenuWidget() {
 		"layout-2": "#00FF00",
 		"layout-3": "#33ffcc",
 		"layout-4": "#00FF00",
-		"layout-5": "#33ffcc",
+		"layout-5": "#FFCD29",
 		"layout-6": "#00FF00",
 		"layout-7": "#33ffcc",
 		"layout-8": "#00FF00",
@@ -55,12 +55,13 @@ function PropertyMenuWidget() {
 	let edgeRadius = 8;
 	let fills = pageType === "connector" ? "#FFFFFF00" : "#ccc";
 	let lines = pageType === "connector" ? "#FFFFFF00" : "#ccc";
+
 	usePropertyMenu(
 		[
 			{
 				itemType: "dropdown",
 				propertyName: "pageTypes",
-				tooltip: "pageType selector",
+				tooltip: "Page Type",
 				selectedOption: pageType,
 				options: pageTypeOptions,
 			},
@@ -161,6 +162,67 @@ function PropertyMenuWidget() {
 							inputBehavior="wrap"
 						/>
 					</AutoLayout>
+				</>
+			)}
+
+			{pageType === "layout-5" && (
+				<>
+					<AutoLayout
+						direction="horizontal" // Row 1
+					>
+						<AutoLayout // Page Type
+							width={413}
+							fill="#fff"
+							padding={{ top: 18, right: 0, bottom: 0, left: 26 }}>
+							<Text
+								fontSize={24}
+								horizontalAlignText={"left"}
+								fill={layoutColors[pageType] || "#000000"}>
+								{pageTypeOptions.find((f) => f.option === pageType).label}
+							</Text>
+						</AutoLayout>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 6, right: 0, bottom: 0, left: 26 }}>
+						<Input // Title
+							value={title}
+							placeholder="Page Title"
+							onTextEditEnd={(e) => {
+								setTitle(e.characters);
+							}}
+							fontSize={40}
+							letterSpacing={-0.4}
+							lineHeight={54}
+							fill={colourDarkGrey}
+							width={387}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 22, right: 0, bottom: 29, left: 26 }}>
+						<Input // Set Location
+							value={location}
+							placeholder="/"
+							onTextEditEnd={(e) => {
+								setLocation(e.characters);
+							}}
+							fontSize={24}
+							letterSpacing={-0.4}
+							fill={colourGrey}
+							width={387}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+
+					{/* <AutoLayout width={515} fill="#f3f3f3"></AutoLayout> */}
 				</>
 			)}
 
