@@ -12,41 +12,53 @@ function PropertyMenuWidget() {
 
 	const pageTypeOptions = [
 		{ option: "connector", label: "Connector" },
+		//Wide
 		{ option: "layout-1", label: "Landing" },
 		{ option: "layout-2", label: "Homepage" },
 		{ option: "layout-3", label: "Parent" },
-		{ option: "layout-4", label: "Child" },
-		{ option: "layout-5", label: "Single" },
+		{ option: "layout-4", label: "Results" },
+		//Regular
+		{ option: "layout-5", label: "Child" },
+
 		{ option: "layout-6", label: "Product" },
+		{ option: "layout-19", label: "Products" }, //stacked
+
 		{ option: "layout-7", label: "Archive" },
 		{ option: "layout-8", label: "Curated Archive" },
 		{ option: "layout-9", label: "Collection" },
-		{ option: "layout-10", label: "Cart" },
-		{ option: "layout-11", label: "Checkout" },
-		{ option: "layout-12", label: "Account" },
-		{ option: "layout-13", label: "External" },
-		{ option: "layout-14", label: "Tool" },
-		{ option: "layout-15", label: "Legals" },
-		{ option: "layout-16", label: "404" },
+		{ option: "layout-10", label: "Account" },
+		//Stacked
+		{ option: "layout-11", label: "Single Page" },
+		{ option: "layout-12", label: "Single Pages" }, //stacked
+		//Short
+		{ option: "layout-13", label: "Cart" },
+		{ option: "layout-14", label: "Checkout" },
+		{ option: "layout-15", label: "External" },
+		{ option: "layout-16", label: "Tool" },
+		{ option: "layout-17", label: "Legals" },
+		{ option: "layout-18", label: "404" },
 	];
 
 	const layoutColors = {
-		"layout-1": "#76AE3E",
-		"layout-2": "#00FF00",
-		"layout-3": "#33ffcc",
-		"layout-4": "#00FF00",
+		"layout-1": "#B4E222",
+		"layout-2": "#76AE3E",
+		"layout-3": "#76AE3E",
+		"layout-4": "#9747FF",
 		"layout-5": "#FFCD29",
-		"layout-6": "#00FF00",
-		"layout-7": "#33ffcc",
-		"layout-8": "#00FF00",
-		"layout-9": "#33ffcc",
-		"layout-10": "#00FF00",
-		"layout-11": "#33ffcc",
-		"layout-12": "#00FF00",
-		"layout-13": "#33ffcc",
-		"layout-14": "#00FF00",
-		"layout-15": "#33ffcc",
-		"layout-16": "#00FF00",
+		"layout-6": "#FFAFA8",
+		"layout-7": "#F17F4E",
+		"layout-8": "#5BBAFF",
+		"layout-9": "#73BFBB",
+		"layout-10": "#CD8E44",
+		"layout-11": "#FFCD29",
+		"layout-12": "#FFCD29",
+		"layout-13": "#FF63A5",
+		"layout-14": "#FF63A5",
+		"layout-15": "#75EED1",
+		"layout-16": "#9747FF",
+		"layout-17": "#7777dd",
+		"layout-18": "#FB6543",
+		"layout-19": "#FFAFA8",
 	};
 
 	const [title, setTitle] = useSyncedState("title", "");
@@ -105,7 +117,10 @@ function PropertyMenuWidget() {
 			verticalAlignItems="center"
 			direction="vertical"
 			spacing={0}>
-			{pageType === "layout-1" && (
+			{(pageType === "layout-1" ||
+				pageType === "layout-2" ||
+				pageType === "layout-3" ||
+				pageType === "layout-4") && (
 				<>
 					<AutoLayout
 						direction="horizontal" // Row 1
@@ -165,7 +180,132 @@ function PropertyMenuWidget() {
 				</>
 			)}
 
-			{pageType === "layout-5" && (
+			{(pageType === "layout-5" ||
+				pageType === "layout-7" ||
+				pageType === "layout-8" ||
+				pageType === "layout-9" ||
+				pageType === "layout-10") && (
+				<>
+					<AutoLayout
+						direction="horizontal" // Row 1
+					>
+						<AutoLayout // Page Type
+							width={624}
+							fill="#fff"
+							padding={{ top: 18, right: 0, bottom: 0, left: 26 }}>
+							<Text
+								fontSize={24}
+								horizontalAlignText={"left"}
+								fill={layoutColors[pageType] || "#000000"}>
+								{pageTypeOptions.find((f) => f.option === pageType).label}
+							</Text>
+						</AutoLayout>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 6, right: 0, bottom: 0, left: 26 }}>
+						<Input // Title
+							value={title}
+							placeholder="Page Title"
+							onTextEditEnd={(e) => {
+								setTitle(e.characters);
+							}}
+							fontSize={40}
+							letterSpacing={-0.4}
+							lineHeight={54}
+							fill={colourDarkGrey}
+							width={598}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 10, right: 0, bottom: 16, left: 26 }}>
+						<Input // Set Location
+							value={location}
+							placeholder="/"
+							onTextEditEnd={(e) => {
+								setLocation(e.characters);
+							}}
+							fontSize={24}
+							letterSpacing={-0.4}
+							lineHeight={54}
+							fill={colourGrey}
+							width={598}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+				</>
+			)}
+
+			{(pageType === "layout-11" || pageType === "layout-6") && (
+				<>
+					<AutoLayout
+						direction="horizontal" // Row 1
+					>
+						<AutoLayout // Page Type
+							width={448}
+							fill="#fff"
+							padding={{ top: 18, right: 0, bottom: 0, left: 26 }}>
+							<Text
+								fontSize={24}
+								horizontalAlignText={"left"}
+								fill={layoutColors[pageType] || "#000000"}>
+								{pageTypeOptions.find((f) => f.option === pageType).label}
+							</Text>
+						</AutoLayout>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 6, right: 0, bottom: 0, left: 26 }}>
+						<Input // Title
+							value={title}
+							placeholder="Page Title"
+							onTextEditEnd={(e) => {
+								setTitle(e.characters);
+							}}
+							fontSize={40}
+							letterSpacing={-0.4}
+							lineHeight={54}
+							fill={colourDarkGrey}
+							width={420}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 22, right: 0, bottom: 29, left: 26 }}>
+						<Input // Set Location
+							value={location}
+							placeholder="/"
+							onTextEditEnd={(e) => {
+								setLocation(e.characters);
+							}}
+							fontSize={24}
+							letterSpacing={-0.4}
+							fill={colourGrey}
+							width={420}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+
+					{/* <AutoLayout width={515} fill="#f3f3f3"></AutoLayout> */}
+				</>
+			)}
+
+			{(pageType === "layout-12" || pageType === "layout-19") && (
 				<>
 					<AutoLayout
 						direction="horizontal" // Row 1
@@ -215,6 +355,72 @@ function PropertyMenuWidget() {
 							letterSpacing={-0.4}
 							fill={colourGrey}
 							width={387}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+
+					{/* <AutoLayout width={515} fill="#f3f3f3"></AutoLayout> */}
+				</>
+			)}
+
+			{(pageType === "layout-13" ||
+				pageType === "layout-14" ||
+				pageType === "layout-15" ||
+				pageType === "layout-16" ||
+				pageType === "layout-17" ||
+				pageType === "layout-18") && (
+				<>
+					<AutoLayout
+						direction="horizontal" // Row 1
+					>
+						<AutoLayout // Page Type
+							width={371}
+							fill="#fff"
+							padding={{ top: 18, right: 0, bottom: 0, left: 26 }}>
+							<Text
+								fontSize={24}
+								horizontalAlignText={"left"}
+								fill={layoutColors[pageType] || "#000000"}>
+								{pageTypeOptions.find((f) => f.option === pageType).label}
+							</Text>
+						</AutoLayout>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 6, right: 0, bottom: 0, left: 26 }}>
+						<Input // Title
+							value={title}
+							placeholder="Page Title"
+							onTextEditEnd={(e) => {
+								setTitle(e.characters);
+							}}
+							fontSize={40}
+							letterSpacing={-0.4}
+							lineHeight={54}
+							fill={colourDarkGrey}
+							width={346}
+							inputFrameProps={{
+								fill: "#fff",
+							}}
+							inputBehavior="wrap"
+						/>
+					</AutoLayout>
+					<AutoLayout
+						fill="#fff"
+						padding={{ top: 22, right: 0, bottom: 29, left: 26 }}>
+						<Input // Set Location
+							value={location}
+							placeholder="/"
+							onTextEditEnd={(e) => {
+								setLocation(e.characters);
+							}}
+							fontSize={24}
+							letterSpacing={-0.4}
+							fill={colourGrey}
+							width={346}
 							inputFrameProps={{
 								fill: "#fff",
 							}}
