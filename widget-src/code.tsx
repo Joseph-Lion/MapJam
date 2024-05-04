@@ -316,7 +316,7 @@ function PropertyMenuWidget() {
 				<>
 					<AutoLayout // Stacked
 						// width={448}
-						padding={4.5}
+						padding={2}
 						verticalAlignItems="end"
 						direction="horizontal">
 						<AutoLayout
